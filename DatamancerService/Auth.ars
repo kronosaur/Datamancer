@@ -1,0 +1,58 @@
+//	Auth.ars
+//
+//	Datamancer API
+//	Copyright (c) 2019 Kronosaur Productions, LLC. All Rights Reserved.
+
+/* -----------------------------------------------------------------------------
+	DATAMANCER.API ENTRY POINTS
+----------------------------------------------------------------------------- */
+
+(define Datamancer.api+changePassword (lambda (URL method headers message)
+	(block (
+		(multiverseChangePassword (apiGetMultiverseFunction 'multiverse.apiChangePassword))
+		)
+
+		(multiverseChangePassword (@ message 'username) {
+			oldPassword: (@ message 'oldPassword)
+			newPassword: (@ message 'newPassword)
+			})
+		)
+	))
+	
+(define Datamancer.api+login (lambda (URL method headers message)
+	(block (
+		(multiverseLogin (apiGetMultiverseFunction 'multiverse.apiLogin))
+		)
+
+		(multiverseLogin (@ message 'username) {
+			actual: (@ message 'actual)
+			challengeCredentials: (@ message 'challengeCredentials)
+			password: (@ message 'password)
+			rememberMe: (@ message 'rememberMe)
+			})
+		)
+	))
+	
+(define Datamancer.api+register (lambda (URL method headers message)
+	(block (
+		(multiverseRegister (apiGetMultiverseFunction 'multiverse.apiRegister))
+		)
+
+		(multiverseRegister (@ message 'username) {
+			credentials: (@ message 'credentials)
+			email: (@ message 'email)
+			password: (@ message 'password)
+			})
+		)
+	))
+
+/* -----------------------------------------------------------------------------
+	HELPER FUNCTIONS
+----------------------------------------------------------------------------- */
+
+(define utlIsDatamancerDirector (lambda (authToken)
+	//	For now we require arcology admin rights. In the future we should 
+	//	store preferences in a single place.
+
+	(find (@ authToken 'rights) 'arc.admin)
+	))

@@ -58,7 +58,7 @@ void CDatamancerEngine::MsgStatus (const SArchonMessage &Msg, const CHexeSecurit
 
 //	MsgStatus
 //
-//	Luminous.status
+//	Datamancer.status
 
 	{
 	SendMessageReply(MSG_REPLY_DATA, CString("Status OK"), Msg);

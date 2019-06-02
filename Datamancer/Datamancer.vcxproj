@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Datamancer.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BootSession.cpp" />
@@ -192,6 +193,9 @@
     <ProjectReference Include="..\..\Hexarc\OpenSSL\OpenSSL.vcxproj">
       <Project>{dbb0e39d-c26d-401c-abbe-26f888ac1694}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Datamancer.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

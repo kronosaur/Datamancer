@@ -17,6 +17,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hexe", "..\Hexarc\Hexe\Hexe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSSL", "..\Hexarc\OpenSSL\OpenSSL.vcxproj", "{DBB0E39D-C26D-401C-ABBE-26F888AC1694}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatamancerService", "DatamancerService\DatamancerService.vcxproj", "{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutonCore", "..\Auton\AutonCore\AutonCore.vcxproj", "{B46746C2-37FB-40C2-B57A-14B9C95422F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +115,28 @@ Global
 		{DBB0E39D-C26D-401C-ABBE-26F888AC1694}.Release|x64.Build.0 = Release|x64
 		{DBB0E39D-C26D-401C-ABBE-26F888AC1694}.Release|x86.ActiveCfg = Release|Win32
 		{DBB0E39D-C26D-401C-ABBE-26F888AC1694}.Release|x86.Build.0 = Release|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Debug|x64.ActiveCfg = Debug|x64
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Debug|x86.ActiveCfg = Debug|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Debug|x86.Build.0 = Debug|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.DebugSecondary|x64.ActiveCfg = Debug|x64
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.DebugSecondary|x64.Build.0 = Debug|x64
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.DebugSecondary|x86.ActiveCfg = Debug|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.DebugSecondary|x86.Build.0 = Debug|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Release|x64.ActiveCfg = Release|x64
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Release|x86.ActiveCfg = Release|Win32
+		{2A0D5559-ACB0-4921-A190-DABB99EEFCE1}.Release|x86.Build.0 = Release|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Debug|x64.ActiveCfg = Debug|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Debug|x64.Build.0 = Debug|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Debug|x86.Build.0 = Debug|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.DebugSecondary|x64.ActiveCfg = Debug|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.DebugSecondary|x64.Build.0 = Debug|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.DebugSecondary|x86.ActiveCfg = Debug|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.DebugSecondary|x86.Build.0 = Debug|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Release|x64.ActiveCfg = Release|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Release|x64.Build.0 = Release|x64
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Release|x86.ActiveCfg = Release|Win32
+		{B46746C2-37FB-40C2-B57A-14B9C95422F3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

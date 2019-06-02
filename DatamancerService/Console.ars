@@ -1,0 +1,19 @@
+//	Console.ars
+//
+//	Datamancer Console Interface
+//	Copyright (c) 2019 Kronosaur Productions, LLC. All Rights Reserved.
+
+function datamancer.status
+		{
+		attributes: (AI2.console AI2.authAdminOnly)
+		export: public
+		help: "Displays status of Datamancer engine."
+		}
+
+	(lambda (params)
+		(block (
+			)
+			(invoke 'Datamancer.status)
+			)
+		)
+

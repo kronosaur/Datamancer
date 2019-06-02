@@ -1,0 +1,22 @@
+//	MultiverseIO.ars
+//
+//	Interface to Multiverse
+//	Copyright (c) 2014 Kronosaur Productions, LLC. All Rights Reserved.
+
+/* -----------------------------------------------------------------------------
+	HELPER FUNCTIONS
+----------------------------------------------------------------------------- */
+
+(define apiGetMultiverseFunction (lambda (theFunction)
+	(block (theCommandInfo)
+		(if (not (set! theCommandInfo (srvFindCommand theFunction 'multiverse.export)))
+			(error 'error (cat "Unable to find " theFunction " function."))
+			)
+
+		(@ theCommandInfo 'code)
+		)
+	))
+
+(define apiValidateAuthToken (lambda (authToken)
+	((apiGetMultiverseFunction 'multiverse.apiValidateAuthToken) authToken)
+	))

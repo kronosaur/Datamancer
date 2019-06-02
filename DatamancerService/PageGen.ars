@@ -1,0 +1,164 @@
+//	PageGen.ars
+//
+//	Utilities for generating pages
+//	Copyright (c) 2019 Kronosaur Productions. All Rights Reserved.
+
+(define gPageQuery nil)
+(define gUserInfo nil)
+
+(define pageGenerateCommonDialogs (lambda ()
+	(cat
+		//	Google Analytics
+
+		"<script type='text/javascript'>"
+
+		"  var _gaq = _gaq || [];"
+		"  _gaq.push(['_setAccount', 'UA-2664806-3']);"
+		"  _gaq.push(['_setDomainName', 'datamancer.kronosaur.com']);"
+		"  _gaq.push(['_trackPageview']);"
+
+		"  (function() {"
+		"   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;"
+		"   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';"
+		"   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);"
+		"  })();"
+
+		"</script>"
+		)
+	))
+
+(define pageGenerateFooter (lambda ()
+    (block (
+        )
+        (cat
+            "<div id='pageFooter'>"
+            "</div>"
+            )
+        )
+    ))
+
+(define pageGenerateHead (lambda ()
+	(block (
+		(authToken (httpGetCookie 'authToken))
+		)
+
+		//	Page query
+
+		(set! gPageQuery (httpGetURLParams))
+
+		//	Figure out if we're signed in and initialize userInfo
+		//	If validation fails, gUserInfo is set to nil
+		
+		(set! gUserInfo (apiValidateAuthToken authToken))
+		
+		//	Generate elements for the head.
+
+		(cat
+			"<meta charset='utf-8'/>"
+
+			//	Common scripts
+
+			"<script src='res/jquery-1.7.2.min.js'></script>"
+			"<script src='res/coreLanguage.js'></script>"
+			"<script src='res/coreHexarc.js'></script>"
+			"<script src='res/coreUI.js'></script>"
+			"<script src='res/coreAuth.js'></script>"
+
+			//	FavIcon
+
+			"<link rel='icon' type='image/png' href='res/FavIcon.png'/>"
+
+			//	Common stylesheets
+
+			"<link rel='stylesheet' href='res/coreUI.css'/>"
+			"<link rel='stylesheet' href='res/datamancer.css'/>"
+
+			//	Initialize some JS variables based on the currenly signed-in
+			//	user (so that scripts can access it).
+				
+			"<script>"
+				"var $UserInfo = new UserInfo(" (toJSON (@ gUserInfo 'username)) ", " (toJSON (@ gUserInfo 'rights)) ", " (toJSON authToken) "); "
+			"</script>"
+			)
+		)
+	))
+
+(define pageGenerateNavBar (lambda ()
+    (block (
+        )
+        (cat
+            "<div id='pageNavBar'>"
+                "<div class='blockCenter'>"
+                    "<a class='logo' href='/'></a>"
+                    "<a class='button' href='/workshop.hexm'>Workshop</a>"
+                    "<a class='button' href='/gallery.hexm'>Gallery</a>"
+                    "<a class='button' href='/artists.hexm'>Artists</a>"
+                    "<a class='button' href='/guidebook.hexm'>Guidebook</a>"
+					(if gUserInfo
+						(cat
+							"<div class='ctrlSignIn'>"
+								"<div class='accountBody'>"
+									"<div class='accountHeader'>" (html (@ gUserInfo 'username)) "</div>"
+									"<div class='accountControls'><span id='coreidAccountChangePassword' class='ctrlLink'>change password</span> &middot; <span id='coreidAccountSignOut' class='ctrlLink'>sign out</span></div>"
+								"</div>"
+								"<div class='accountIcon'><div class='ctrlImagePlaceholder'></div></div>"
+							"</div>"
+							)
+						(cat
+							"<div class='ctrlSignIn'>"
+								"<div class='accountBody'>"
+									"<div id='coreidAccountSignIn' class='accountHeader accountSignIn'>Click to sign in</div>"
+									"<div class='accountControls'>&nbsp;</div>"
+								"</div>"
+								"<div class='accountIcon'><div class='ctrlImagePlaceholder'></div></div>"
+							"</div>"
+							)
+						)
+                "</div>"
+            "</div>"
+            )
+        )
+    ))
+
+(define pageGenerateUserObj (lambda (userInfo userID)
+	(block (basicUser)
+
+		(switch
+			
+			//	If we have no programID, then the object is nil
+
+			(= userID "")
+				(set! gUserPage nil)
+
+			//	Load the record object from the database. If we cannot find it, then we
+			//	create an error object.
+
+			(not (set! basicUser (invoke 'Cryptosaur.getUser (lowercase userID))))
+				(set! gUserPage { id:(lowercase userID) error:'notFound errorMsg:(cat "Unable to find user: " (lowercase userID) ".") })
+
+			//	We have a valid record
+
+			(block (
+				(userInfo { username: (@ basicUser 'username) })
+				(programList (utlListUserPrograms userInfo))
+				(canAssign (map programList 'excludeNil programDesc (utlIsProgramMember userInfo programDesc)))
+				)
+
+				(set! gUserPage {
+					id: (lowercase userID)
+					username: (@ basicUser 'username)
+					})
+
+				(define gUserCanAssign canAssign)
+				)
+			)
+
+		""
+		)
+	))
+
+(define pageGenerateUsername (lambda (username)
+	(cat
+		"<a href='user.hexm?id=" (urlParam (lowercase username)) "' class='spanUsername'>" (html username) "</a>"
+		)
+	))

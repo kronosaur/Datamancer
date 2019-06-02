@@ -1,0 +1,55 @@
+//	DatamancerPackage.ars
+//
+//	Datamancer Service
+//	Copyright (c) 2019 Kronosaur Productions, LLC. All Rights Reserved.
+
+Arc.package Datamancer
+	{
+	version:	"0.1.0 (2019.06.01)"
+	}
+
+//	Includes
+
+Include "Auth.ars"
+Include "Console.ars"
+Include "MultiverseIO.ars"
+Include "PageGen.ars"
+
+//	Allow this service to send message to the Datamancer archon
+
+include messages Datamancer.command
+
+/* -----------------------------------------------------------------------------
+	DATAMANCER.WEB SERVICE
+----------------------------------------------------------------------------- */
+
+Arc.service Datamancer.web
+	{
+	name:		"Datamancer"
+	
+	protocol:	http
+	port:		80
+	hosts:		(datamancer.benedict.com datamancer.kronosaur.com)
+	urlPaths:	"/"
+	
+	service:	www
+	filePaths:	"/Site/"
+	defaultFile:	"index.hexm"
+	}
+
+/* -----------------------------------------------------------------------------
+	DATAMANCER.API SERVICE
+----------------------------------------------------------------------------- */
+
+Arc.service Datamancer.api
+	{
+	name:		"Datamancer API"
+	
+	protocol:	http
+	port:		80
+	hosts:		(datamancer.benedict.com datamancer.kronosaur.com)
+	urlPaths:	"/api/"
+	
+	service:	hexcode
+	output:		"application/json"
+	}

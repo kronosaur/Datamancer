@@ -41,7 +41,7 @@ int main (int argc, char* argv[])
 	Config.dwFlags = 0;
 	Config.dwFlags |= (Options.bDebug ? PROCESS_FLAG_DEBUG : 0);
 
-	//	Add the Luminous2 engine
+	//	Add the engine
 
 	SEngineDesc *pDesc = Config.Engines.Insert();
 	pDesc->pEngine = new CDatamancerEngine;
