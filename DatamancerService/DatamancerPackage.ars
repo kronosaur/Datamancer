@@ -38,6 +38,22 @@ Arc.service Datamancer.web
 	}
 
 /* -----------------------------------------------------------------------------
+	DATAMANCER.MSG SERVICE
+----------------------------------------------------------------------------- */
+
+Arc.service Datamancer.msg
+	{
+	name:		"Datamancer Hexarc Message Handler"
+	protocol:	hexarcMsg
+	}
+
+function Datamancer.msg+testFunc (lambda (p1)
+	(block ()
+		(cat "TestFunc: " p1)
+		)
+	)
+
+/* -----------------------------------------------------------------------------
 	DATAMANCER.API SERVICE
 ----------------------------------------------------------------------------- */
 
@@ -49,7 +65,13 @@ Arc.service Datamancer.api
 	port:		80
 	hosts:		(datamancer.benedict.com datamancer.kronosaur.com)
 	urlPaths:	"/api/"
+
+	allowAccess:all		//	Any package can call this API
 	
 	service:	hexcode
 	output:		"application/json"
 	}
+
+function Datamancer.api+test (lambda ()
+	(invoke 'Datamancer.msg+testFunc "Hello, World!")
+	)
