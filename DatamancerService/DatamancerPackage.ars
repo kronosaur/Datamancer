@@ -45,6 +45,8 @@ Arc.service Datamancer.msg
 	{
 	name:		"Datamancer Hexarc Message Handler"
 	protocol:	hexarcMsg
+
+	allowAccess:all		//	Any package can call this API
 	}
 
 function Datamancer.msg+testFunc (lambda (p1)
@@ -66,8 +68,6 @@ Arc.service Datamancer.api
 	hosts:		(datamancer.benedict.com datamancer.kronosaur.com)
 	urlPaths:	"/api/"
 
-	allowAccess:all		//	Any package can call this API
-	
 	service:	hexcode
 	output:		"application/json"
 	}

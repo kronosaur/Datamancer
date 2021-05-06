@@ -7,6 +7,8 @@
 	DATAMANCER.API ENTRY POINTS
 ----------------------------------------------------------------------------- */
 
+//	LATER: Convert these to have server-side cookies
+
 (define Datamancer.api+changePassword (lambda (URL method headers message)
 	(block (
 		(multiverseChangePassword (apiGetMultiverseFunction 'multiverse.apiChangePassword))
